@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Category";
+}
+
+
+<div class="border container Category" >
+    <div class="row mt-3">
+        <div class="col-6">
+            <h4> This is Table View</h4>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-sm btn-outline-primary">
+               <i class="bi bi-plus-circle"></i> &nbsp; Create New
+			</a>
+            @*DownloadExcel pdf*@
+            <a class="btn btn-sm btn-outline-primary">
+               <i class="bi bi-printer"></i> &nbsp; Print
+			</a>
+            @*DownloadExcel pdf*@
+
+            @*DownloadExcel start*@
+            <a href="@Url.Action("DownloadExcel","Category")" class="btn btn-sm btn-outline-primary">
+             <i class="bi bi-file-arrow-down"></i> &nbsp; xls file
+			</a>
+            @*DownloadExcel end*@
+		</div>
+    </div>
+    <br />
+</div>
+
+<table class=" table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Display Order
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td width="30%">
+                    @obj.Name
+                </td>
+                <td width="30%">
+                    @obj.DisplayOrder
+                </td>
+                <td>
+                    <div class="w-100 btn-group center" role="group">
+
+                        @*Edit*@
+                        <a asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id"
+                        class="btn btn-info mx-2 "> <i class="bi bi-pencil-square"></i> Edit</a>
+
+                        @*Delete*@
+                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id"
+                        class="btn btn-danger mx-2 "> <i class="bi bi-trash-fill"></i> Delete</a>
+					</div>
+				</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+     
